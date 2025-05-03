@@ -1,6 +1,7 @@
 [submodule "boolector"]
 	path = boolector
 	url = https://github.com/ivajon/boolector
+	branch = "fixes"
 [submodule "btor2tools"]
 	path = btor2tools
 	url = https://github.com/ivajon/btor2tools
