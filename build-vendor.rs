@@ -49,6 +49,7 @@ impl Build {
             self.out_dir.join("deps/install/lib").display()
         );
         println!("cargo:rustc-link-lib=static=lgl");
+        println!("cargo:rustc-link-lib=static=cadical");
         println!(
             "cargo:include={}",
             self.out_dir.join("deps/install/include").display()
@@ -78,9 +79,7 @@ impl Build {
     pub fn build(&mut self) -> Artifacts {
         // TODO: Unfortunately BUILDDIR is not overwriteable either implement
         // whole `Configure.sh` or find out how to overwrite `$BUILDDIR`
-        let target_dir = Config::new(&self.out_dir)
-            .profile("Release")
-            .build();
+        let target_dir = Config::new(&self.out_dir).profile("Release").build();
 
         Artifacts {
             lib_dir: target_dir.join("lib"),
