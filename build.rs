@@ -51,13 +51,23 @@ impl Build {
                 .expect("Unable to copy Boolector sources to OUT_DIR");
         }
 
-        if !self.out_dir.join("deps/install/lib/liblgl.a").exists() {
+        // if !self.out_dir.join("deps/install/lib/liblgl.a").exists() {
+        //     self.run_command(
+        //         Command::new("/usr/bin/env")
+        //             .arg("bash")
+        //             .arg(self.out_dir.join("contrib/setup-lingeling.sh"))
+        //             .current_dir(&self.out_dir),
+        //         "Setup Lingeling",
+        //     );
+        // }
+
+        if !self.out_dir.join("deps/install/lib/libcadical.a").exists() {
             self.run_command(
                 Command::new("/usr/bin/env")
                     .arg("bash")
-                    .arg(self.out_dir.join("contrib/setup-lingeling.sh"))
+                    .arg(self.out_dir.join("contrib/setup-cadical.sh"))
                     .current_dir(&self.out_dir),
-                "Setup Lingeling",
+                "Setup cadical",
             );
         }
 
@@ -65,7 +75,7 @@ impl Build {
             "cargo:rustc-link-search=native={}",
             self.out_dir.join("deps/install/lib").display()
         );
-        println!("cargo:rustc-link-lib=static=lgl");
+        // println!("cargo:rustc-link-lib=static=lgl");
         println!("cargo:rustc-link-lib=static=cadical");
         println!(
             "cargo:include={}",
@@ -87,16 +97,6 @@ impl Build {
                     .arg(self.out_dir.join("contrib/setup-btor2tools.sh"))
                     .current_dir(&self.out_dir),
                 "Setup btor2tools",
-            );
-        }
-
-        if !self.out_dir.join("deps/install/lib/libcadical.a").exists() {
-            self.run_command(
-                Command::new("/usr/bin/env")
-                    .arg("bash")
-                    .arg(self.out_dir.join("contrib/setup-cadical.sh"))
-                    .current_dir(&self.out_dir),
-                "Setup cadical",
             );
         }
 
