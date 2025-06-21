@@ -22,7 +22,7 @@ fn main() {
     //
     println!("cargo:rustc-link-lib=static=boolector");
     if std::env::consts::OS == "macos" {
-        println!("cargo:rustc-link-lib=libc++");
+        println!("cargo:rustc-link-lib=c++");
     } else {
         println!("cargo:rustc-link-lib=stdc++");
     }
