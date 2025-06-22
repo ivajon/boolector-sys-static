@@ -56,15 +56,15 @@ impl Build {
                 .expect("Unable to copy Boolector sources to OUT_DIR");
         }
 
-        // if !self.out_dir.join("deps/install/lib/liblgl.a").exists() {
-        //     self.run_command(
-        //         Command::new("/usr/bin/env")
-        //             .arg("bash")
-        //             .arg(self.out_dir.join("contrib/setup-lingeling.sh"))
-        //             .current_dir(&self.out_dir),
-        //         "Setup Lingeling",
-        //     );
-        // }
+        if !self.out_dir.join("deps/install/lib/liblgl.a").exists() {
+            self.run_command(
+                Command::new("/usr/bin/env")
+                    .arg("bash")
+                    .arg(self.out_dir.join("contrib/setup-lingeling.sh"))
+                    .current_dir(&self.out_dir),
+                "Setup Lingeling",
+            );
+        }
 
         if !self.out_dir.join("deps/install/lib/libcadical.a").exists() {
             self.run_command(
@@ -80,7 +80,7 @@ impl Build {
             "cargo:rustc-link-search=native={}",
             self.out_dir.join("deps/install/lib").display()
         );
-        // println!("cargo:rustc-link-lib=static=lgl");
+        println!("cargo:rustc-link-lib=static=lgl");
         println!("cargo:rustc-link-lib=static=cadical");
         println!(
             "cargo:include={}",
